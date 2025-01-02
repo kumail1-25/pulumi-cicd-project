@@ -1,0 +1,11 @@
+name: pulumi-cicd-project
+description: Implementation of CI/CD pipeline
+runtime:
+  name: python
+  options:
+    toolchain: pip
+    virtualenv: venv
+config:
+  pulumi:tags:
+    value:
+      pulumi:template: python
