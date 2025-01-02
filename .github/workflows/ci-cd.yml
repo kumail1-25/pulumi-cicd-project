@@ -35,7 +35,11 @@ jobs:
         
     - name: Set Pulumi Access Token
       run: echo "PULUMI_ACCESS_TOKEN=${{ secrets.PULUMI_ACCESS_TOKEN }}" >> $GITHUB_ENV  
-    
+   
+    - name: Create the dev stack (if it doesn't exist)
+      run: |
+          pulumi stack init dev || echo "Dev stack already exists"
+   
     - name: Run Pulumi Preview
       run: pulumi preview --stack dev  # Preview the changes
 
