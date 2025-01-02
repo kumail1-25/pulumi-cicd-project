@@ -33,8 +33,10 @@ jobs:
         export AWS_SECRET_ACCESS_KEY=test
         export AWS_DEFAULT_REGION=us-east-1
 
-    - name: Pulumi Preview
-      run: pulumi preview --confirm --stack dev # Change to your stack name, 'dev' for example
+    - name: Run Pulumi Preview
+      run: |
+        source venv/bin/activate
+        pulumi preview --stack dev  # Preview the changes
 
     # Optional: If you want to deploy, you can run pulumi up instead
     - name: Pulumi Up (Deploy)
