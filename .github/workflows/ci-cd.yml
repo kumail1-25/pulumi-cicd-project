@@ -34,9 +34,7 @@ jobs:
         export AWS_DEFAULT_REGION=us-east-1
 
     - name: Run Pulumi Preview
-      run: |
-        source venv/bin/activate
-        pulumi preview --stack dev  # Preview the changes
+      run: pulumi preview --stack dev  # Preview the changes
 
     # Optional: If you want to deploy, you can run pulumi up instead
     - name: Pulumi Up (Deploy)
