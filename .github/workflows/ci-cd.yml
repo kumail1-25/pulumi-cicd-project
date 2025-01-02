@@ -1,0 +1,41 @@
+name: Pulumi CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main # Trigger the pipeline when changes are pushed to the 'main' branch
+  pull_request:
+    branches:
+      - main # Trigger the pipeline when a pull request is made to the 'main' branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x' # Set the Python version
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install pulumi pulumi_aws pulumi_localstack # Ensure Pulumi and required libraries are installed
+
+    - name: Configure AWS Credentials (or LocalStack for Local Development)
+      run: |
+        export AWS_ACCESS_KEY_ID=test
+        export AWS_SECRET_ACCESS_KEY=test
+        export AWS_DEFAULT_REGION=us-east-1
+
+    - name: Pulumi Preview
+      run: pulumi preview --yes --stack dev # Change to your stack name, 'dev' for example
+
+    # Optional: If you want to deploy, you can run pulumi up instead
+    - name: Pulumi Up (Deploy)
+      run: pulumi up --yes --stack dev # Change to your stack name
