@@ -45,4 +45,4 @@ jobs:
 
     # Optional: If you want to deploy, you can run pulumi up instead
     - name: Pulumi Up (Deploy)
-      run: pulumi up --yes --stack dev # Change to your stack name
+      run: pulumi up --yes --stack prod # Change to your stack name
