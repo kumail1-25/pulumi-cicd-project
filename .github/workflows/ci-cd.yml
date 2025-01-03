@@ -39,12 +39,9 @@ jobs:
     - name: Set Pulumi Config Passphrase
       run: echo "PULUMI_CONFIG_PASSPHRASE=${{ secrets.PULUMI_CONFIG_PASSPHRASE }}" >> $GITHUB_ENV
    
-    - name: Create the dev stack (if it doesn't exist)
-      run: |
-          pulumi stack init dev || echo "Dev stack already exists"
    
     - name: Run Pulumi Preview
-      run: pulumi preview --stack dev  # Preview the changes
+      run: pulumi preview --stack prod  # Preview the changes
 
     # Optional: If you want to deploy, you can run pulumi up instead
     - name: Pulumi Up (Deploy)
